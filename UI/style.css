@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #131517;
+
+}
+#logo{
+    margin-left: 2%;
+    margin-top: 1%;
+}
+.box{
+    margin:auto;
+    margin-top: 10%;
+    font-family: 'Open Sans', sans-serif;
+    width: 350px;
+
+}
+
+#APIHash, #btn{
+    margin-top: 40px;
+    padding: 10px;
+    background-color: #252e38;
+    color: #fff;
+    outline: 0;
+    border: 0;
+    font-size: 1.3em;
+}
+#APIHash{
+    border-bottom: 2px solid #6023E2;
+    width: 350px;
+}
+#btn{
+    margin-left: 70px;
+    cursor: pointer;
+    width: 230px;
+    text-transform: uppercase;
+
+}
+#btn:hover{
+    color: #fff;
+    background-color: #2285f5;
+}
+.bottom{
+    height: 35px;
+    position: absolute;
+    bottom: 0;
+    margin-left: 46%;
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+}
+#container {
+    position: relative;
+}
+.modal-content{
+    background-color: #252e38;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+}
+#Code_From_Watch{
+    margin-left: 30%;
+    text-align: center;
+    width: 190px;
+    padding: 10px;
+    background-color: #252e38;
+    color: #fff;
+    outline: 0;
+    border: 0;
+    font-size: 1.3em;
+    border-bottom: 3px solid #6023E2;
+}
+#Code_From_Watch_btn{
+    font-family: 'Open Sans', sans-serif;
+    background-color: #6023E2;
+    border: none;
+    color:#fff;
+}
+.modal-header {
+    border-bottom: none;
+}
+.modal-footer {
+    border-top: none;
+}
