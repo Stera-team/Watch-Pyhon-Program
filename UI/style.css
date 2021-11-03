@@ -60,10 +60,16 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 #Code_From_Watch{
-    margin-left: 30%;
+    margin-left: 35px;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    display:inline-block;
+    margin-right:10px;
+}
+#Code_From_Watch_Input{
+    display:inline-block;
     text-align: center;
     width: 190px;
-    padding: 10px;
     background-color: #252e38;
     color: #fff;
     outline: 0;
@@ -82,4 +88,17 @@ body{
 }
 .modal-footer {
     border-top: none;
+}
+#Error_pass_title {
+    color: red;
+}
+
+#Error_pass_text {
+    margin: 0px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    color: red;
 }

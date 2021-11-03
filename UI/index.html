@@ -22,7 +22,6 @@
             <input type="submit" id="btn" value="Connect">
         </form>
     </div>
-
     <div class="bottom">
         <form action="#">
             <p id="license" style="font-size: 18px">Stera © 2021</p>
@@ -38,7 +37,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="Code_From_Watch" placeholder="Code From Watch">
+                    <p id="Code_From_Watch">Code From Watch:</p>
+                    <input type="text" id="Code_From_Watch_Input">
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="Code_From_Watch_btn" class="btn btn-primary">Connect</button>
@@ -46,6 +46,27 @@
             </div>
         </div>
     </div>
+    <div id="Error_pass" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Error_pass_title"><i class="fas fa-exclamation-circle"></i>Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="Error_pass_text">Error</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Main">
+
 </div>
 
 
