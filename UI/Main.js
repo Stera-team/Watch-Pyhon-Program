@@ -6,7 +6,6 @@ function sendAPIHash(){
     let APIHash = document.getElementById('APIHash').value;
 
     APIHash = APIHash.split(' ').join("");
-    console.log(APIHash);
 
     if(APIHash != ""){
         $('#Code_Asking').modal();
@@ -34,7 +33,7 @@ function connection(){
     let rightCode = "max";
 
     if(code == rightCode){
-        //Going to Main Page
+        window.location.replace("Main.html");
     }else{
         $(function () {
             $('#Code_Asking').modal('toggle');
@@ -42,3 +41,12 @@ function connection(){
        showError("code");
     }
 }
+
+function hideAPIHash() {
+    let x = document.getElementById("APIHash_Window");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }

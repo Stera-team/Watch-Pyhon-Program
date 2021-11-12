@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #131517;
+
+}
+.logo{
+    margin-left: 35%;
+    margin-top: 1%;
+}
+.Main-part, .Display-part{
+    font-family: 'Open Sans', sans-serif;
+    border-bottom: 3px solid #6023E2;
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 40px;
+    color: #fff;
+}
+.Main-part{
+    width: 90px;
+}
+.Display-part{
+    width: 210px;
+}
+#Main_Info{
+    font-family: 'Open Sans', sans-serif;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #fff;
+}
+footer {
+    font-family: sans-serif;
+}
+
+select {
+    margin-left: 25px;
+    font-size: .9rem;
+    padding: 2px 5px;
+}
+
+footer {
+    font-size: .8rem;
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+}
+#APIHash_Section{
+    margin-top: 10px;
+}
+#APIHash_Window{
+    font-size: 15px;
+    width: 223px
+}
+
