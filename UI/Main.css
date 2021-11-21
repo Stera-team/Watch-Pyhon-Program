@@ -25,7 +25,7 @@ body{
 .Display-part{
     width: 210px;
 }
-#Main_Info{
+#Main_Info, #Tokens_Selector_Section{
     font-family: 'Open Sans', sans-serif;
     margin-left: 20px;
     margin-top: 10px;
@@ -48,11 +48,31 @@ footer {
     bottom: 30px;
     left: 30px;
 }
-#APIHash_Section{
+#APIHash_Section, #Tokens_Selector_Section{
     margin-top: 10px;
 }
 #APIHash_Window{
     font-size: 15px;
     width: 223px
 }
-
+#Add_Token_btn, #Remove_Token_btn, #Advenced_Token_btn{
+    display:inline-block;
+    margin-left: 10px;
+    width: 100px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #6023E2;
+    border: none;
+    color:#fff;
+};
+#additional_info, .DisplayInfo{
+    width:50%;
+    height:100px;
+    margin:10px;
+}
+#additional_info{
+    font-family: 'Open Sans', sans-serif;
+    margin-left: 140px; 
+    margin-top: 10px;
+    font-size: 20px; 
+    color: #fff;
+}

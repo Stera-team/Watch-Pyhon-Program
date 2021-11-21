@@ -61,11 +61,30 @@
             
         </div>
     </div>
-    <div class="DisplayInfo">
-        <p class="Display-part">Display Info</p>
+<!--    <div style="width:100%;height:auto;display:flex;"> -->
+        <div class="DisplayInfo">
+            <p class="Display-part">Display Info</p>
 
+            <button type="button" id="Add_Token_btn" class="btn btn-primary" onclick="showOptions('Add_Token')">Add</button>
+            <button type="button" id="Remove_Token_btn" class="btn btn-primary">Remove</button>
+            <button type="button" id="Advenced_Token_btn" class="btn btn-primary">Custom</button>
 
-    </div>
+            <div style="display: none;" id="Add_Token">
+            
+                <div id="Tokens_Selector_Section">
+                    <label for="token-select">Tokens - </label>
+        
+                    <select name="tokens" id="Tokens_Selector" onchange="showCrypto()" onchange="showCrypto()">
+                        <option value="smth">--Please choose token--</option>
+                    </select> 
+                </div>
+            </div>
+        </div>
+   
+        <div id="additional_info">
+    
+        </div>
+ <!--   </div> -->
 <script src="Main.js"></script>
 </body>
 </html>
