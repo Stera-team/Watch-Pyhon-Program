@@ -34,22 +34,7 @@
                     <label class="form-check-label" for="inlineRadio2">24h.</label>
                 </div>
             </div>
-            
-            <div id="Time_Zone">
-                
-                <label for="pet-select">Time Zone - </label>
-
-                <select name="pets" id="pet-select">
-                    <option value="">--Please choose a time zone--</option>
-                    <option value="dog">Dog</option>
-                    <option value="cat">Cat</option>
-                    <option value="hamster">Hamster</option>
-                    <option value="parrot">Parrot</option>
-                    <option value="spider">Spider</option>
-                    <option value="goldfish">Goldfish</option>
-                </select> 
-            </div>
-
+           
             <div id="APIHash_Section">
                 
                 <p style="display:inline-block;margin-right:39.3px;">Api Hash - </p>
@@ -61,29 +46,45 @@
             
         </div>
     </div>
-<!--    <div style="width:100%;height:auto;display:flex;"> -->
-        <div class="DisplayInfo">
-            <p class="Display-part">Display Info</p>
 
-            <button type="button" id="Add_Token_btn" class="btn btn-primary" onclick="showOptions('Add_Token')">Add</button>
-            <button type="button" id="Remove_Token_btn" class="btn btn-primary">Remove</button>
-            <button type="button" id="Advenced_Token_btn" class="btn btn-primary">Custom</button>
+    <div class="DisplayInfo">
+        <p class="Display-part">Display Info</p>
 
-            <div style="display: none;" id="Add_Token">
+        <div id="Add_Token" >
             
-                <div id="Tokens_Selector_Section">
-                    <label for="token-select">Tokens - </label>
+            <div id="Tokens_Selector_Section">
+                <label for="Tokens_Selector" style="display: inline;">Tokens - </label>
         
-                    <select name="tokens" id="Tokens_Selector" onchange="showCrypto()" onchange="showCrypto()">
-                        <option value="smth">--Please choose token--</option>
-                    </select> 
+                <select name="tokens" id="Tokens_Selector" onchange="showCrypto()">
+                    <option value="smth">--Please choose token--</option>
+                </select> 
+
+                <div id="Current_table_section" style="display: inline;">
+                    <table class="table table-sm table-dark" id="table">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="width: 150px; text-align: center;">Symbol</th>
+                            <th scope="col" style="width: 200px; text-align: center;">Price</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                      </table>
                 </div>
             </div>
         </div>
+    </div>
    
-        <div id="additional_info">
     
+
+    <div id="additional_info" style="display: none;">
+        <div id="token_info">
+            <img alt="Token Logo" height="40" width="40" id="token_logo">
+            <h1 id="token_price"></h1>
         </div>
+        <button type="button" id="Add_Token_btn" class="btn btn-primary" onclick="addToken()">ADD</button>
+    </div>
+
+    
  <!--   </div> -->
 <script src="Main.js"></script>
 </body>

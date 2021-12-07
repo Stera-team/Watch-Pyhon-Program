@@ -48,6 +48,9 @@ footer {
     bottom: 30px;
     left: 30px;
 }
+.DisplayInfo{
+    margin-top: 40px;
+}
 #APIHash_Section, #Tokens_Selector_Section{
     margin-top: 10px;
 }
@@ -71,8 +74,43 @@ footer {
 }
 #additional_info{
     font-family: 'Open Sans', sans-serif;
-    margin-left: 140px; 
-    margin-top: 10px;
     font-size: 20px; 
     color: #fff;
+}
+#token_info{
+    margin-top: 8px;
+}
+#token_logo{
+    display: inline;
+    margin-left: 140px;
+}
+#token_price{
+    font-family: 'Open Sans', sans-serif;
+    display: inline;
+    margin-top: 50px;
+    font-size: 20px;
+}
+#Add_Token_btn{
+    margin-top: 12px;
+    margin-left: 220px;
+}
+#table{
+    text-align: center;
+    display: inline;
+    float: right;
+    width: 370px;
+    margin-right: 20px;
+}
+.table_button{
+    color: #fff;
+    padding: 0;
+    border: none;
+    background: none;
+    width: 30px;
+    height: 30px;
+    background-color: #6023E2;
+    margin-right: 10px;
+}
+td{
+    border-style : hidden!important;
 }

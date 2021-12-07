@@ -1,3 +1,5 @@
+document.writeln("<script type='text/javascript' src='Logo_Exceptions.js'></script>");
+
 let connectionBtn = document.querySelector("#btn");
 
 if(connectionBtn){
@@ -70,12 +72,16 @@ let priceArray = [];
 let namesArray = [];
 
 xhr.onload = () => {
-    for(let i = 0; i < 20; i++){
+    for(let i = 0; i < 100; i++){
+
         let token = document.createElement('option');
         let tryPrice = (JSON.parse(xhr.response).data[i].priceUsd);
+
         namesArray[i] = (JSON.parse(xhr.response).data[i].symbol);
         token.innerHTML = (JSON.parse(xhr.response).data[i].name);
+
         token.value = namesArray[i];
+
         if(namesArray[i] == 'SHIB'){
             priceArray[i] = ((+tryPrice)*1000).toFixed(3);
         }else{
@@ -90,55 +96,63 @@ xhr.onload = () => {
 xhr.send();
 // Tokens from coinCapAPI in select - END
 
-
-//Show_Hide options in DisplayInfo - Start
-
-function showOptions(id){
-    let w = document.getElementById(id);
-    
-    if(w.style.display == 'inline'){
-        w.style.display = 'none';
-        document.getElementById("additional_info").style.display = 'none';
-    }else{
-        w.style.display = 'inline';
-        document.getElementById("additional_info").style.display = 'inline';
-    }
-
-}
-//Show_Hide options in DisplayInfo - END
-
 //Show edition info about current crypto - Start
 function showCrypto(){
-    document.getElementById("additional_info").innerHTML = "";
+    document.getElementById('token_price').innerHTML = '';
+    document.getElementById('token_logo').innerHTML = '';
+
     let symbol  =   document.getElementById("Tokens_Selector").value;
-    let name    =   document.getElementById("Tokens_Selector");
-    name        =   ((name.options[name.selectedIndex].text).toLowerCase()).split(" ").join("-");
+    if(symbol != "smth"){
+        let name    =   document.getElementById("Tokens_Selector");
+        name        =   ((name.options[name.selectedIndex].text).toLowerCase()).split(" ").join("-");
     
-    let num = namesArray.indexOf(symbol);
-    symbol = symbol.toLowerCase();
-    
-    let price = document.createElement("H1");
-    let logo = document.createElement("IMG");
+        let num = namesArray.indexOf(symbol);
+        symbol = symbol.toLowerCase();
 
-    let priceText   =   document.createTextNode(priceArray[num] + "$");
+        let priceText   =   document.createTextNode(priceArray[num] + "$");
+        document.getElementById('token_price').appendChild(priceText);
 
-    
+        let logo = document.getElementById('token_logo');
 
-    price.appendChild(priceText);
-    price.setAttribute("id", "cryptoPrice");
-    logo.setAttribute("src", `https://cryptologos.cc/logos/${name}-${symbol}-logo.png?v=014`);
-    logo.setAttribute("width", "40");
-    logo.setAttribute("height", "40");
-    logo.setAttribute("id", "cryptoLogo");
-    logo.setAttribute("alt", "Token Logo");
-    document.getElementById("additional_info").appendChild(logo); 
-    document.getElementById("additional_info").appendChild(price);
+        let logo_url = checkLogo(name, symbol);
 
-    document.getElementById("cryptoLogo").style.display = 'inline';
-    document.getElementById("cryptoPrice").style.display = 'inline';
-    document.getElementById("cryptoPrice").style.marginLeft = '20px';
-    document.getElementById("cryptoPrice").style.marginTop = '5px';
-    document.getElementById("cryptoPrice").style.fontSize = '20px';
+        logo.setAttribute("src", logo_url);
 
+        document.getElementById('additional_info').style.display = 'inline'
+    }else{
+        document.getElementById('additional_info').style.display = 'none';
+    }
 }
 //Show edition info about current crypto - END
+
+// ADD token to table
+
+function addToken(){
+
+    let symbol  =   document.getElementById("Tokens_Selector").value;
+    symbol      =   symbol.toUpperCase();
+
+    let num     =   namesArray.indexOf(symbol);
+    let price   =   priceArray[num] + "$";
+
+    let table   =   document.getElementById("table");
+    
+    table.innerHTML += `
+            <tr>
+                <td>${symbol}</td>
+                <td>${price}</td>
+                <td><button class="table_button">X</button></td>
+            </tr>
+        `;
+    function onDeleteRow(e) {
+        if (!e.target.classList.contains("table_button")) {
+          return;
+        }
+    
+        const btn = e.target;
+        btn.closest("tr").remove();
+    }
+    
+    
+    table.addEventListener("click", onDeleteRow);
+}
