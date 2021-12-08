@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content="width=device-width,
-          initial-scale=1.0">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +38,7 @@
                 
                 <p style="display:inline-block;margin-right:39.3px;">Api Hash - </p>
 
-                <input style="display:inline-block;" type="password" value="ApiHash here" id="APIHash_Window" disabled>
+                <input style="display:inline-block;" type="password"  id="APIHash_Window" disabled>
                 <input type="checkbox" onclick="hideAPIHash()">
                 
             </div>
@@ -73,7 +72,6 @@
             </div>
         </div>
     </div>
-   
     
 
     <div id="additional_info" style="display: none;">
@@ -84,6 +82,41 @@
         <button type="button" id="Add_Token_btn" class="btn btn-primary" onclick="addToken()">ADD</button>
     </div>
 
+    <div id="Alarms" style="font-family: 'Open Sans', sans-serif; font-size: 20px;">
+        <p class="Alarms-part">Alarms</p>
+
+        <div id="alarms_table" style="display: inline;">
+            <table class="table table-sm table-dark" id="alarm_table">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 150px; text-align: center;">Name</th>
+                    <th scope="col" style="width: 200px; text-align: center;">Time</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+              </table>
+        </div>
+
+        <div id="Alarms_Settings">
+            <div>
+                <p style="display:inline-block;margin-right:10px;">Name: </p>
+                <input type="text" id="alarms_name">
+            </div>
+
+            <div>
+                <p style="display:inline-block;margin-right:10px; margin-top: 15px;">Time: </p>
+                <input type="time" id="alarms_time" required>
+            </div>
+
+            <button type="button" id="Set_Alarm_Btn" class="btn btn-primary" onclick="addAlarm()">Add</button>
+
+            
+        </div>
+    </div>
+    <div id="SaveChanges">
+        <button type="button" id="SaveChangesBtn" class="btn btn-primary">Save</button>
+        <button type="button" id="ResetChangesBtn" class="btn btn-primary">Reset</button>
+    </div>
     
  <!--   </div> -->
 <script src="Main.js"></script>

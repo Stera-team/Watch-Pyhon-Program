@@ -11,7 +11,12 @@ body{
     margin-left: 35%;
     margin-top: 1%;
 }
-.Main-part, .Display-part{
+input:disabled {
+    font-family: 'Open Sans', sans-serif;
+    background: rgb(182, 180, 180);
+    color: #0c0c0c;
+}
+.Main-part, .Display-part, .Alarms-part{
     font-family: 'Open Sans', sans-serif;
     border-bottom: 3px solid #6023E2;
     margin-top: 20px;
@@ -24,10 +29,16 @@ body{
 }
 .Display-part{
     width: 210px;
+    margin-top: 40px;
 }
-#Main_Info, #Tokens_Selector_Section{
+.Alarms-part{
+    width: 120px;
+    margin-top: 150px;
+
+}
+#Main_Info, #Tokens_Selector_Section, #Alarms_Settings{
     font-family: 'Open Sans', sans-serif;
-    margin-left: 20px;
+    margin-left: 30px;
     margin-top: 10px;
     font-size: 20px;
     color: #fff;
@@ -48,9 +59,6 @@ footer {
     bottom: 30px;
     left: 30px;
 }
-.DisplayInfo{
-    margin-top: 40px;
-}
 #APIHash_Section, #Tokens_Selector_Section{
     margin-top: 10px;
 }
@@ -58,7 +66,7 @@ footer {
     font-size: 15px;
     width: 223px
 }
-#Add_Token_btn, #Remove_Token_btn, #Advenced_Token_btn{
+#Add_Token_btn{
     display:inline-block;
     margin-left: 10px;
     width: 100px;
@@ -71,6 +79,11 @@ footer {
     width:50%;
     height:100px;
     margin:10px;
+}
+#Tokens_Selector{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: black;
 }
 #additional_info{
     font-family: 'Open Sans', sans-serif;
@@ -94,11 +107,11 @@ footer {
     margin-top: 12px;
     margin-left: 220px;
 }
-#table{
+#table, #alarm_table{
     text-align: center;
     display: inline;
     float: right;
-    width: 370px;
+    width: 330px;
     margin-right: 20px;
 }
 .table_button{
@@ -113,4 +126,31 @@ footer {
 }
 td{
     border-style : hidden!important;
+}
+#alarms_name{
+    width: 210px;
+    font-size: 15px;
+    padding: 3px;
+    color: black; 
+    font-family: 'Open Sans', sans-serif;
+}
+#alarms_time{
+    margin-left: 10px;
+    height: 30px;
+}
+#Set_Alarm_Btn{
+    border: none;
+    margin-left: 230px;
+    background-color: #6023E2;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 40px;
+}
+#SaveChangesBtn, #ResetChangesBtn{
+    border: none;
+    background-color: #6023E2;
+    font-family: 'Open Sans', sans-serif;
+    float: right;
+    font-size: 22px;
+    margin-right: 45px;
+    margin-bottom: 30px;
 }

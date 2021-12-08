@@ -34,11 +34,10 @@ if(codeBtn){
     codeBtn.addEventListener("click", connection);
 }
 
+let rightCode = "max"; //TEST CODE
 
 function connection(){
     let code = document.getElementById('Code_From_Watch_Input').value;
-
-    let rightCode = "max"; // test
 
     if(code == rightCode){
         window.location.replace("Main.html");
@@ -48,6 +47,10 @@ function connection(){
         });
        showError("code");
     }
+}
+
+if(document.getElementById("APIHash_Window")){
+    document.getElementById("APIHash_Window").value = rightCode;
 }
 
 function hideAPIHash() {
@@ -125,34 +128,66 @@ function showCrypto(){
 }
 //Show edition info about current crypto - END
 
-// ADD token to table
+// ADD token to table - Start
 
 function addToken(){
 
-    let symbol  =   document.getElementById("Tokens_Selector").value;
-    symbol      =   symbol.toUpperCase();
+        let symbol  =   document.getElementById("Tokens_Selector").value;
+        symbol      =   symbol.toUpperCase();
 
-    let num     =   namesArray.indexOf(symbol);
-    let price   =   priceArray[num] + "$";
+        let num     =   namesArray.indexOf(symbol);
+        let price   =   priceArray[num] + "$";
 
-    let table   =   document.getElementById("table");
+        let table   =   document.getElementById("table");
+
+        table.innerHTML += `
+                <tr>
+                    <td style="font-size:16px">${symbol}</td>
+                    <td style="font-size:16px">${price}</td>
+                    <td><button class="table_button">X</button></td>
+                </tr>
+            `;
+        function onDeleteRow(e) {
+            if (!e.target.classList.contains("table_button")) {
+                return;
+            }
     
-    table.innerHTML += `
+            const btn = e.target;
+            btn.closest("tr").remove();
+        }
+    
+        table.addEventListener("click", onDeleteRow);
+}
+
+// ADD token to table - End
+
+
+//Alarms writing - Start
+
+function addAlarm(){
+
+        let alarmName = document.getElementById("alarms_name").value;
+        let alarmTime = document.getElementById("alarms_time").value;
+
+        let table   =   document.getElementById("alarm_table");
+    
+        table.innerHTML += `
             <tr>
-                <td>${symbol}</td>
-                <td>${price}</td>
+                <td style="font-size:16px">${alarmName}</td>
+                <td style="font-size:16px">${alarmTime}</td>
                 <td><button class="table_button">X</button></td>
             </tr>
         `;
-    function onDeleteRow(e) {
-        if (!e.target.classList.contains("table_button")) {
-          return;
+        function onDeleteRow(e) {
+            if (!e.target.classList.contains("table_button")) {
+            return;
+            }
+    
+            const btn = e.target;
+            btn.closest("tr").remove();
         }
-    
-        const btn = e.target;
-        btn.closest("tr").remove();
-    }
-    
-    
-    table.addEventListener("click", onDeleteRow);
+
+        table.addEventListener("click", onDeleteRow);
 }
+
+//Alarms writing - End
