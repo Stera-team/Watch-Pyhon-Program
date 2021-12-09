@@ -15,17 +15,28 @@ function sendAPIHash(){
     if(APIHash != ""){
         $('#Code_Asking').modal();
     }else{
-        showError("empty");
+        showError("Loading", "empty");
     }
 }
 
-function showError(error){
-    if(error == "empty"){
-        document.getElementById("Error_pass_text").innerHTML = "Input is Empty";
-    }else if(error == "code"){
-        document.getElementById("Error_pass_text").innerHTML = "Code is not valid";
-    }
-    $('#Error_pass').modal();
+function showError(window, error){
+    if(window == "Loading"){
+
+        if(error == "empty"){
+            document.getElementById("Error_pass_text").innerHTML = "Input is empty";
+        }else if(error == "code"){
+            document.getElementById("Error_pass_text").innerHTML = "Code is not valid";
+        }
+
+        $('#Error_pass').modal();
+    }else if (window == "Main"){
+
+        if(error == "empty_time"){
+            document.getElementById("Error_pass_text_Main").innerHTML = "Time or name is empty";
+        }
+
+        $('#Error_pass_Main').modal();
+    }   
 }
 
 let codeBtn = document.querySelector("#Code_From_Watch_btn");
@@ -45,7 +56,7 @@ function connection(){
         $(function () {
             $('#Code_Asking').modal('toggle');
         });
-       showError("code");
+       showError("Loading", "code");
     }
 }
 
@@ -132,13 +143,17 @@ function showCrypto(){
 
 function addToken(){
 
+    let table   =   document.getElementById("table");
+
+    let length  =   table.rows.length;
+
+    if(length < 6){
+
         let symbol  =   document.getElementById("Tokens_Selector").value;
         symbol      =   symbol.toUpperCase();
 
         let num     =   namesArray.indexOf(symbol);
         let price   =   priceArray[num] + "$";
-
-        let table   =   document.getElementById("table");
 
         table.innerHTML += `
                 <tr>
@@ -157,6 +172,7 @@ function addToken(){
         }
     
         table.addEventListener("click", onDeleteRow);
+    }
 }
 
 // ADD token to table - End
@@ -166,28 +182,38 @@ function addToken(){
 
 function addAlarm(){
 
+    let table   =   document.getElementById("alarm_table");
+
+    let length  =   table.rows.length;
+    
+    if(length < 4){
+
         let alarmName = document.getElementById("alarms_name").value;
         let alarmTime = document.getElementById("alarms_time").value;
 
-        let table   =   document.getElementById("alarm_table");
-    
-        table.innerHTML += `
-            <tr>
-                <td style="font-size:16px">${alarmName}</td>
-                <td style="font-size:16px">${alarmTime}</td>
-                <td><button class="table_button">X</button></td>
-            </tr>
-        `;
-        function onDeleteRow(e) {
-            if (!e.target.classList.contains("table_button")) {
-            return;
-            }
-    
-            const btn = e.target;
-            btn.closest("tr").remove();
-        }
+        if((alarmName.split(" ").join("") == "") || (alarmTime == "")){
+            showError("Main", "empty_time");
+        }else{
 
-        table.addEventListener("click", onDeleteRow);
+            table.innerHTML += `
+                <tr>
+                    <td style="font-size:16px">${alarmName}</td>
+                    <td style="font-size:16px">${alarmTime}</td>
+                    <td><button class="table_button">X</button></td>
+                </tr>
+            `;
+            function onDeleteRow(e) {
+                if (!e.target.classList.contains("table_button")) {
+                return;
+                }
+    
+                const btn = e.target;
+                btn.closest("tr").remove();
+            }
+
+            table.addEventListener("click", onDeleteRow);
+        }
+    }
 }
 
 //Alarms writing - End

@@ -154,3 +154,30 @@ td{
     margin-right: 45px;
     margin-bottom: 30px;
 }
+#ResetChangesBtn{
+    background-color: gray;
+}
+.modal-content{
+    background-color: #252e38;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+}
+.modal-header {
+    border-bottom: none;
+}
+.modal-footer {
+    border-top: none;
+}
+#Error_pass_title {
+    color: red;
+}
+
+#Error_pass_text_Main{
+    margin: 0px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    color: red;
+}
