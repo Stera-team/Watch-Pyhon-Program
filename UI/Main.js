@@ -111,20 +111,39 @@ xhr.send();
 // Tokens from coinCapAPI in select - END
 
 //Show edition info about current crypto - Start
+
+let sockets = [];
+
 function showCrypto(){
+    
     document.getElementById('token_price').innerHTML = '';
     document.getElementById('token_logo').innerHTML = '';
 
     let symbol  =   document.getElementById("Tokens_Selector").value;
+    symbol = symbol.toLowerCase();
+
+    let url = `wss://stream.binance.com:9443/ws/${symbol}usdt@trade`;
+    
+    if(sockets[0]){
+        let socket = sockets.pop();
+        socket.close();
+    
+        let newSocket = new WebSocket(url);
+        sockets.push(newSocket);
+    }else{
+        let ws = new WebSocket(url);
+        sockets.push(ws);
+    }
+
     if(symbol != "smth"){
         let name    =   document.getElementById("Tokens_Selector");
         name        =   ((name.options[name.selectedIndex].text).toLowerCase()).split(" ").join("-");
-    
-        let num = namesArray.indexOf(symbol);
-        symbol = symbol.toLowerCase();
 
-        let priceText   =   document.createTextNode(priceArray[num] + "$");
-        document.getElementById('token_price').appendChild(priceText);
+        sockets[0].onmessage = (event) => {
+            let stockObject = JSON.parse(event.data);
+            let priceText   = (+(stockObject.p)).toFixed(2) + "$";  
+            document.getElementById('token_price').innerHTML = priceText;
+        }
 
         let logo = document.getElementById('token_logo');
 
@@ -134,6 +153,7 @@ function showCrypto(){
 
         document.getElementById('additional_info').style.display = 'inline'
     }else{
+
         document.getElementById('additional_info').style.display = 'none';
     }
 }
