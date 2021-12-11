@@ -1,5 +1,3 @@
-document.writeln("<script type='text/javascript' src='Logo_Exceptions.js'></script>");
-
 let connectionBtn = document.querySelector("#btn");
 
 if(connectionBtn){
@@ -139,10 +137,34 @@ function showCrypto(){
         let name    =   document.getElementById("Tokens_Selector");
         name        =   ((name.options[name.selectedIndex].text).toLowerCase()).split(" ").join("-");
 
+        console.log(namesArray);
+        let num = namesArray.indexOf(symbol.toUpperCase());
+        
+
+        let priceText   =   priceArray[num] + "$";
+        document.getElementById('token_price').innerHTML =  priceText;
+
+        symbol = symbol.toLowerCase();
+
+        let lastPrice = priceArray[num];
+
+        let lastTime = Date.now();
+
         sockets[0].onmessage = (event) => {
-            let stockObject = JSON.parse(event.data);
-            let priceText   = (+(stockObject.p)).toFixed(2) + "$";  
-            document.getElementById('token_price').innerHTML = priceText;
+            let newTime = Date.now();
+
+            if(newTime - lastTime > 2000){
+                let stockObject = JSON.parse(event.data);
+                let price   = (+(stockObject.p)).toFixed(2);  
+                document.getElementById('token_price').innerHTML = price + "$";
+
+                document.getElementById('token_price').style.color = !lastPrice || lastPrice === price ? 'white' : price > lastPrice ? 'green' : 'red';
+
+                lastPrice = price;
+                lastTime = newTime;
+                priceArray[num] = price;
+            }
+            
         }
 
         let logo = document.getElementById('token_logo');
