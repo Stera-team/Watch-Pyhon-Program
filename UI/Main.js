@@ -1,22 +1,3 @@
-let connectionBtn = document.querySelector("#btn");
-
-if(connectionBtn){
-    connectionBtn.addEventListener("click", sendAPIHash);
-}
-
-
-function sendAPIHash(){
-    let APIHash = document.getElementById('APIHash').value;
-
-    APIHash = APIHash.split(' ').join("");
-
-    if(APIHash != ""){
-        $('#Code_Asking').modal();
-    }else{
-        showError("Loading", "empty");
-    }
-}
-
 function showError(window, error){
     if(window == "Loading"){
 
@@ -37,31 +18,6 @@ function showError(window, error){
     }   
 }
 
-let codeBtn = document.querySelector("#Code_From_Watch_btn");
-
-if(codeBtn){
-    codeBtn.addEventListener("click", connection);
-}
-
-let rightCode = "max"; //TEST CODE
-
-function connection(){
-    let code = document.getElementById('Code_From_Watch_Input').value;
-
-    if(code == rightCode){
-        window.location.replace("Main.html");
-    }else{
-        $(function () {
-            $('#Code_Asking').modal('toggle');
-        });
-       showError("Loading", "code");
-    }
-}
-
-if(document.getElementById("APIHash_Window")){
-    document.getElementById("APIHash_Window").value = rightCode;
-}
-
 function hideAPIHash() {
     let x = document.getElementById("APIHash_Window");
     if (x.type === "password") {
@@ -80,24 +36,26 @@ const xhr = new XMLHttpRequest();
 
 xhr.open('GET', requestURL);
 
-let priceArray = [];
-let namesArray = [];
+let priceArray      = [];
+let namesArray      = [];
+let fullNamesArray  = [];
 
 xhr.onload = () => {
     for(let i = 0; i < 100; i++){
 
-        let token = document.createElement('option');
-        let tryPrice = (JSON.parse(xhr.response).data[i].priceUsd);
+        let token           = document.createElement('option');
+        let tryPrice        = (JSON.parse(xhr.response).data[i].priceUsd);
 
-        namesArray[i] = (JSON.parse(xhr.response).data[i].symbol);
-        token.innerHTML = (JSON.parse(xhr.response).data[i].name);
+        namesArray[i]       = (JSON.parse(xhr.response).data[i].symbol);
+        fullNamesArray[i]   = (JSON.parse(xhr.response).data[i].name);
+        token.innerHTML     = fullNamesArray[i] 
 
-        token.value = namesArray[i];
+        token.value         = namesArray[i];
 
         if(namesArray[i] == 'SHIB'){
-            priceArray[i] = ((+tryPrice)*1000).toFixed(3);
+            priceArray[i]   = ((+tryPrice)*1000).toFixed(3);
         }else{
-            priceArray[i] = (+tryPrice).toFixed(2);
+            priceArray[i]   = (+tryPrice).toFixed(2);
         }
 
         select.appendChild(token);
@@ -137,7 +95,6 @@ function showCrypto(){
         let name    =   document.getElementById("Tokens_Selector");
         name        =   ((name.options[name.selectedIndex].text).toLowerCase()).split(" ").join("-");
 
-        console.log(namesArray);
         let num = namesArray.indexOf(symbol.toUpperCase());
         
 
@@ -185,36 +142,13 @@ function showCrypto(){
 
 function addToken(){
 
-    let table   =   document.getElementById("table");
+    let symbol  =   document.getElementById("Tokens_Selector").value;
+    symbol      =   symbol.toUpperCase();
 
-    let length  =   table.rows.length;
+    let num     =   namesArray.indexOf(symbol);
+    let price   =   priceArray[num];
 
-    if(length < 6){
-
-        let symbol  =   document.getElementById("Tokens_Selector").value;
-        symbol      =   symbol.toUpperCase();
-
-        let num     =   namesArray.indexOf(symbol);
-        let price   =   priceArray[num] + "$";
-
-        table.innerHTML += `
-                <tr>
-                    <td style="font-size:16px">${symbol}</td>
-                    <td style="font-size:16px">${price}</td>
-                    <td><button class="table_button">X</button></td>
-                </tr>
-            `;
-        function onDeleteRow(e) {
-            if (!e.target.classList.contains("table_button")) {
-                return;
-            }
-    
-            const btn = e.target;
-            btn.closest("tr").remove();
-        }
-    
-        table.addEventListener("click", onDeleteRow);
-    }
+    addTokensFromWatch(symbol, price)
 }
 
 // ADD token to table - End
@@ -224,38 +158,10 @@ function addToken(){
 
 function addAlarm(){
 
-    let table   =   document.getElementById("alarm_table");
+    let alarmName = document.getElementById("alarms_name").value;
+    let alarmTime = document.getElementById("alarms_time").value;
 
-    let length  =   table.rows.length;
-    
-    if(length < 4){
-
-        let alarmName = document.getElementById("alarms_name").value;
-        let alarmTime = document.getElementById("alarms_time").value;
-
-        if((alarmName.split(" ").join("") == "") || (alarmTime == "")){
-            showError("Main", "empty_time");
-        }else{
-
-            table.innerHTML += `
-                <tr>
-                    <td style="font-size:16px">${alarmName}</td>
-                    <td style="font-size:16px">${alarmTime}</td>
-                    <td><button class="table_button">X</button></td>
-                </tr>
-            `;
-            function onDeleteRow(e) {
-                if (!e.target.classList.contains("table_button")) {
-                return;
-                }
-    
-                const btn = e.target;
-                btn.closest("tr").remove();
-            }
-
-            table.addEventListener("click", onDeleteRow);
-        }
-    }
+    addAlarmsFromWatch(alarmName, alarmTime);
 }
 
 //Alarms writing - End
