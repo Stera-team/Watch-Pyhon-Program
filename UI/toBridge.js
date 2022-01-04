@@ -42,15 +42,11 @@ function sendAPIHash(){
 
 /*
 function IsDeviceFounded(){
-
     let amountOfTries = 0;
     
     let IsDeviceFoundedURL = "http://localhost:5000/IsDeviceFounded";
-
     const IsDeviceFoundedXHR = new XMLHttpRequest();
-
     IsDeviceFoundedXHR.open("GET", SetApiKeyURL);
-
     IsDeviceFoundedXHR.onload = () => {
         if((JSON.parse(IsDeviceFoundedXHR.response)).status == true){
             showError("Loading", error)
@@ -77,19 +73,28 @@ function CheckCode(){
     let CheckCodeURL = `http://127.0.0.1:5000/CheckCode?code=${code}`;
     
     const CheckCodeXHR = new XMLHttpRequest();
-    
+
     CheckCodeXHR.open("GET", CheckCodeURL);
-    
+
     CheckCodeXHR.onload = () => {
+            
         if((JSON.parse(CheckCodeXHR.response)).status){
             window.location.replace("Main.html");
         }else{
+            showError("Loading", "code");
+
             $(function () {
                 $('#Code_Asking').modal('toggle');
-            });
-           showError("Loading", "code");
+            });   
         }
+    }  
+    
+    CheckCodeXHR.onerror = () => {
+        $(function () {
+            $('#Code_Asking').modal('toggle');
+        }); 
     }
+    
     CheckCodeXHR.send();       
 }
 
@@ -99,6 +104,12 @@ function CheckCode(){
 if(document.getElementById("SaveChangesBtn")){
     GetDeviceSettings()
 }
+
+let StartIs12HorsFormat;
+let StartCryptoTickers;
+let StartAlarms;
+let StartPrices = [];
+let StartSymbols = [];
 
 function GetDeviceSettings(){
 
@@ -110,17 +121,17 @@ function GetDeviceSettings(){
 
     GetDeviceSettingsXHR.onload = () => {
 
-        let is12HorsFormat = JSON.parse(GetDeviceSettingsXHR.response).is12HourFormat;
-        let cryptoTickers = JSON.parse(GetDeviceSettingsXHR.response).cryptoTickers;
-        let alarms = JSON.parse(GetDeviceSettingsXHR.response).alarms;
+        StartIs12HorsFormat = JSON.parse(GetDeviceSettingsXHR.response).is12HourFormat;
+        StartCryptoTickers = JSON.parse(GetDeviceSettingsXHR.response).cryptoTickers;
+        StartAlarms = JSON.parse(GetDeviceSettingsXHR.response).alarms;
 
-        if(is12HorsFormat){
+        if(StartIs12HorsFormat){
             document.getElementById("12hFormat").checked = true;
         }else{
             document.getElementById("24hFormat").checked = true;
         }
 
-        for(let i = 0; i < cryptoTickers.length; i++){
+        for(let i = 0; i < StartCryptoTickers.length; i++){
             
             const requestURL2 = 'https://api.coincap.io/v2/assets';
 
@@ -131,8 +142,15 @@ function GetDeviceSettings(){
             xhr2.onload = () => {
                 for(let j = 0; j < 100; j++){
 
-                    if(cryptoTickers[i].toLowerCase() == (JSON.parse(xhr2.response).data[j].id)){
-                        addTokensFromWatch(JSON.parse(xhr2.response).data[j].symbol, (+(JSON.parse(xhr2.response).data[j].priceUsd)).toFixed(2));
+                    if(StartCryptoTickers[i].toLowerCase() == (JSON.parse(xhr2.response).data[j].id)){
+                        
+                        let price = (+(JSON.parse(xhr2.response).data[j].priceUsd)).toFixed(2);
+                        let symbol = JSON.parse(xhr2.response).data[j].symbol;
+
+                        addTokensFromWatch(symbol, price);
+                        StartSymbols[i] = symbol;
+                        StartPrices[i] = price;
+                        
                         break;
                     }
                 }
@@ -140,9 +158,9 @@ function GetDeviceSettings(){
             xhr2.send();
         }
 
-        for(let i = 0; i < alarms.length; i++){
-            let name = alarms[i].name;
-            let time = alarms[i].time;
+        for(let i = 0; i < StartAlarms.length; i++){
+            let name = StartAlarms[i].name;
+            let time = StartAlarms[i].time;
 
             addAlarmsFromWatch(name, time);
         }
@@ -290,6 +308,48 @@ function SetDeviceSettings(){
             
     SetDeviceSettingsXHR.send();
 }
+
+
+//Reset
+
+let resetBtn = document.querySelector("#ResetChangesBtn");
+
+if(resetBtn){
+    resetBtn.addEventListener("click", reset);
+}
+
+function reset(){
+    let alarmsTable   =   document.getElementById("alarm_table");
+    let cryptoTable   =   document.getElementById("table");
+
+    let alarmsTableLength  =   alarmsTable.rows.length;
+    let cryptoTableLength  =   cryptoTable.rows.length;
+    
+    for(let i = 1; i < cryptoTableLength; i++){
+        cryptoTable.deleteRow(1);
+    }
+
+    for(let i = 1; i < alarmsTableLength; i++){
+        alarmsTable.deleteRow(1);
+    }
+    
+    if(StartIs12HorsFormat){
+        document.getElementById("12hFormat").checked = true;
+    }else{
+        document.getElementById("24hFormat").checked = true;
+    }
+    
+    for(let i = 0; i < StartCryptoTickers.length; i++){ 
+        addTokensFromWatch(StartSymbols[i], StartPrices[i]);
+    }
+
+    for(let i = 0; i < StartAlarms.length; i++){
+        addAlarmsFromWatch(StartAlarms[i].name, StartAlarms[i].time);
+    }
+
+
+}
+
 //1) - http://127.0.0.1:5000/SetApiKey?apiKey=max
 //2) - http://127.0.0.1:5000/CheckCode?code=111111
 //3) - http://localhost:5000/GetDeviceSettings
