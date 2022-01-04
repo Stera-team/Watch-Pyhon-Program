@@ -28,42 +28,48 @@ function hideAPIHash() {
   }
 
 // Tokens from coinCapAPI in select - Start
-select = document.getElementById('Tokens_Selector');
-
-const requestURL = 'https://api.coincap.io/v2/assets';
-
-const xhr = new XMLHttpRequest();
-
-xhr.open('GET', requestURL);
 
 let priceArray      = [];
 let namesArray      = [];
 let fullNamesArray  = [];
 
-xhr.onload = () => {
-    for(let i = 0; i < 100; i++){
+inSelect();
+function inSelect(){
+    select = document.getElementById('Tokens_Selector');
 
-        let token           = document.createElement('option');
-        let tryPrice        = (JSON.parse(xhr.response).data[i].priceUsd);
+    const requestURL = 'https://api.coincap.io/v2/assets';
 
-        namesArray[i]       = (JSON.parse(xhr.response).data[i].symbol);
-        fullNamesArray[i]   = (JSON.parse(xhr.response).data[i].name);
-        token.innerHTML     = fullNamesArray[i] 
+    const xhr = new XMLHttpRequest();
 
-        token.value         = namesArray[i];
+    xhr.open('GET', requestURL);
 
-        if(namesArray[i] == 'SHIB'){
-            priceArray[i]   = ((+tryPrice)*1000).toFixed(3);
-        }else{
-            priceArray[i]   = (+tryPrice).toFixed(2);
-        }
+    xhr.onload = () => {
+        for(let i = 0; i < 100; i++){
 
-        select.appendChild(token);
-    } 
-    
+            let token           = document.createElement('option');
+            let tryPrice        = (JSON.parse(xhr.response).data[i].priceUsd);
+
+            namesArray[i]       = (JSON.parse(xhr.response).data[i].symbol);
+            fullNamesArray[i]   = (JSON.parse(xhr.response).data[i].name);
+            token.innerHTML     = fullNamesArray[i] 
+
+            token.value         = namesArray[i];
+
+            if(namesArray[i] == 'SHIB'){
+                priceArray[i]   = ((+tryPrice)*1000).toFixed(3);
+            }else{
+                priceArray[i]   = (+tryPrice).toFixed(2);
+            }
+
+            select.appendChild(token);
+        } 
+    }
+    xhr.onerror = () => {
+        inSelect();
+    }
+
+    xhr.send();
 }
-
-xhr.send();
 // Tokens from coinCapAPI in select - END
 
 //Show edition info about current crypto - Start
