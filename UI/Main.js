@@ -98,6 +98,9 @@ function showCrypto(){
     }
 
     if(symbol != "smth"){
+
+        document.getElementById('token_price').style.color = '#fff'
+
         let name    =   document.getElementById("Tokens_Selector");
         name        =   ((name.options[name.selectedIndex].text).toLowerCase()).split(" ").join("-");
 
