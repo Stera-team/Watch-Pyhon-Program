@@ -121,9 +121,9 @@ function GetDeviceSettings(){
 
     GetDeviceSettingsXHR.onload = () => {
 
-        StartIs12HorsFormat = JSON.parse(GetDeviceSettingsXHR.response).is12HourFormat;
-        StartCryptoTickers = JSON.parse(GetDeviceSettingsXHR.response).cryptoTickers;
-        StartAlarms = JSON.parse(GetDeviceSettingsXHR.response).alarms;
+        StartIs12HorsFormat = JSON.parse(GetDeviceSettingsXHR.response).settings.is12HourFormat;
+        StartCryptoTickers = JSON.parse(GetDeviceSettingsXHR.response).settings.cryptoTickers;
+        StartAlarms = JSON.parse(GetDeviceSettingsXHR.response).settings.alarms;
 
         if(StartIs12HorsFormat){
             document.getElementById("12hFormat").checked = true;
