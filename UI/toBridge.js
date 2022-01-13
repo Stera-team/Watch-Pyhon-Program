@@ -279,7 +279,7 @@ function SetDeviceSettings(){
 
         cryptoFullName = fullNamesArray[namesArray.indexOf(cryptoFullName)];
         
-        cryptoTickers[i - 1] = cryptoFullName;
+        cryptoTickers[i - 1] = cryptoFullName.toLowerCase();
     }
 
     //Sending
@@ -305,7 +305,11 @@ function SetDeviceSettings(){
             return false;
         }
     }
+
+    console.log(json);
             
+    $('#Saved_Main').modal();
+
     SetDeviceSettingsXHR.send();
 }
 
