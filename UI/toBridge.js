@@ -81,11 +81,14 @@ function CheckCode(){
         if((JSON.parse(CheckCodeXHR.response)).status){
             loginPage = document.getElementById("Login_page");
             mainPage = document.getElementById("Main");
-            
-            $('#Code_Asking').modal('hide');
+            setTimeout(() => {
+                $('#Code_Asking').modal('hide');
+                GetDeviceSettings();
+                inSelect();
 
-            loginPage.style.display = "none";
-            mainPage.style.display = "block";
+                loginPage.style.display = "none";
+                mainPage.style.display = "block";
+            }, 7000);
 
         }else{
             showError("Loading", "code");

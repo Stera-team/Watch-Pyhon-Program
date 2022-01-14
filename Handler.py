@@ -5,8 +5,8 @@ from json import loads
 class BridgeHandler():
     DEVICE_STATUS         = 'Connected'
     DEVICE_API_KEY        = 'ROHZKDBN'
-    DEVICE_CHECK_KEY_HASH = "1171183ab6a7fbbb6e11cd012bb44a16"
-    DEVICE_NOW_SETTINGS   = {"settings": {"alarms": [],"cryptoTickers": ["cardano"],"is12HourFormat": True},"settingsHash": "f527712fddf4b7dbe9689c3082b8cc59", "status": True}
+    DEVICE_CHECK_KEY_HASH = None
+    DEVICE_NOW_SETTINGS   = None
     DEVICE_NOW_ALARMS     = None
 
     @staticmethod
