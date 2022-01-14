@@ -3,7 +3,7 @@ import requests
 
 from subprocess import Popen
 
-BRIDGE      = Popen("python Bridge.py") # Запуск бріджа
+BRIDGE      = Popen("python Bridge.py")
 BRIDGE_URL  = "http://localhost:5000"
 
 
@@ -25,4 +25,4 @@ def pythonRequest(url):
 
     
 
-eel.start("Loading_Page.html", size=(1000, 600), close_callback=closeEvent)
+eel.start("Main.html", size=(1000, 600), close_callback=closeEvent)

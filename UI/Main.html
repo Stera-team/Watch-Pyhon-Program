@@ -7,118 +7,169 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="Loading_Page.css">
     <link rel="stylesheet" type="text/css" href="Main.css">
     <script src="eel.js"></script>
 
     <title>🐍 Watch</title>
 </head>
 <body>
-
-    <div class="Main">
-        <img class = "logo" src="logo.png" alt="logo" style="width:20%;height:20%;">
-
-        <p class="Main-part">Main</p>
-
-        <div id="Main_Info">
-            <div id="Time_Format">
-                
-                <p style="display:inline-block;margin-right:10px;">Time Format - </p>
-
-                <div class="form-check form-check-inline" style="display:inline-block; ">
-                    <input id="12hFormat" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">12h.</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="24hFormat" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">24h.</label>
-                </div>
-            </div>
-           
-            <div id="APIHash_Section">
-                
-                <p style="display:inline-block;margin-right:39.3px;">Api Hash - </p>
-
-                <input style="display:inline-block;" type="password"  id="APIHash_Window" disabled>
-                <input type="checkbox" onclick="hideAPIHash()">
-                
-            </div>
-            
-        </div>
+<div id="Login_page">
+    <img class = "logo" src="logo.png" alt="logo" style="width:20%;height:20%;">
+    <div class="box">
+        <form>
+            <input type="text" id="APIHash" placeholder="APIKey">
+            <input id="btn" value="Connect">
+        </form>
     </div>
-
-    <div class="DisplayInfo">
-        <p class="Display-part">Display Info</p>
-
-        <div id="Add_Token" >
-            
-            <div id="Tokens_Selector_Section">
-                <label for="Tokens_Selector" style="display: inline;">Tokens - </label>
-                
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <select name="tokens" id="Tokens_Selector" onchange="showCrypto()">
-                    <option value="smth">--Please choose token--</option>
-                </select> 
-
-                <div id="Current_table_section" style="display: inline;">
-                    <table class="table table-sm table-dark" id="table">
-                        <thead>
-                          <tr>
-                            <th scope="col" style="width: 150px; text-align: center;">Symbol</th>
-                            <th scope="col" style="width: 200px; text-align: center;">Price</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                      </table>
+    <div class="bottom">
+        <form action="#">
+            <p id="license" style="font-size: 18px">Stera © 2021</p>
+        </form>
+    </div>
+    <div id="Code_Asking" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Connecting to Watch</h5>
+                    <button style="color: #fff; font-family: 'Open Sans', sans-serif;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="Code_From_Watch">Code From Watch:</p>
+                    <input type="text" id="Code_From_Watch_Input">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="Code_From_Watch_btn" class="btn btn-primary">Connect</button>
                 </div>
             </div>
         </div>
     </div>
-    
-
-    <div id="additional_info" style="display: none;">
-        <div id="token_info">
-            <img alt="Token Logo" height="40" width="40" id="token_logo">
-            <h1 id="token_price"></h1>
+    <div id="Error_pass" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Error_pass_title"><i class="fas fa-exclamation-circle"></i>Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="Error_pass_text">Error</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <button type="button" id="Add_Token_btn" class="btn btn-primary" onclick="addToken()">ADD</button>
     </div>
+</div>
 
-    <div id="Alarms" style="font-family: 'Open Sans', sans-serif; font-size: 20px;">
-        <p class="Alarms-part">Alarms</p>
+<div id="Main" style="display: none;">
+    <img class = "logo" src="logo.png" alt="logo" style="width:20%;height:20%;">
 
-        <div id="alarms_table" style="display: inline;">
-            <table class="table table-sm table-dark" id="alarm_table">
-                <thead>
-                  <tr>
-                    <th scope="col" style="width: 150px; text-align: center;">Name</th>
-                    <th scope="col" style="width: 200px; text-align: center;">Time</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-              </table>
+    <p class="Main-part">Main</p>
+
+    <div id="Main_Info">
+        <div id="Time_Format">
+            
+            <p style="display:inline-block;margin-right:10px;">Time Format - </p>
+
+            <div class="form-check form-check-inline" style="display:inline-block; ">
+                <input id="12hFormat" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <label class="form-check-label" for="inlineRadio1">12h.</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="24hFormat" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <label class="form-check-label" for="inlineRadio2">24h.</label>
+            </div>
         </div>
+       
+        <div id="APIHash_Section">
+            
+            <p style="display:inline-block;margin-right:39.3px;">Api Hash - </p>
 
-        <div id="Alarms_Settings">
-            <div>
-                <p style="display:inline-block;margin-right:10px;">Name: </p>
-                <input type="text" id="alarms_name">
-            </div>
-
-            <div>
-                <p style="display:inline-block;margin-right:10px; margin-top: 15px;">Time: </p>
-                <input type="time" id="alarms_time" required>
-            </div>
-
-            <button type="button" id="Set_Alarm_Btn" class="btn btn-primary" onclick="addAlarm()">Add</button>
-
+            <input style="display:inline-block;" type="password"  id="APIHash_Window" disabled>
+            <input type="checkbox" onclick="hideAPIHash()">
             
         </div>
+        
     </div>
+
+<div class="DisplayInfo">
+    <p class="Display-part">Display Info</p>
+
+    <div id="Add_Token" >
+        
+        <div id="Tokens_Selector_Section">
+            <label for="Tokens_Selector" style="display: inline;">Tokens - </label>
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <select name="tokens" id="Tokens_Selector" onchange="showCrypto()">
+                <option value="smth">--Please choose token--</option>
+            </select> 
+
+            <div id="Current_table_section" style="display: inline;">
+                <table class="table table-sm table-dark" id="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" style="width: 150px; text-align: center;">Symbol</th>
+                        <th scope="col" style="width: 200px; text-align: center;">Price</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="additional_info" style="display: none;">
+    <div id="token_info">
+        <img alt="Token Logo" height="40" width="40" id="token_logo">
+        <h1 id="token_price"></h1>
+    </div>
+    <button type="button" id="Add_Token_btn" class="btn btn-primary" onclick="addToken()">ADD</button>
+</div>
+
+<div id="Alarms" style="font-family: 'Open Sans', sans-serif; font-size: 20px;">
+    <p class="Alarms-part">Alarms</p>
+
+    <div id="alarms_table" style="display: inline;">
+        <table class="table table-sm table-dark" id="alarm_table">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 150px; text-align: center;">Name</th>
+                <th scope="col" style="width: 200px; text-align: center;">Time</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+          </table>
+    </div>
+
+    <div id="Alarms_Settings">
+        <div>
+            <p style="display:inline-block;margin-right:10px;">Name: </p>
+            <input type="text" id="alarms_name">
+        </div>
+
+        <div>
+            <p style="display:inline-block;margin-right:10px; margin-top: 15px;">Time: </p>
+            <input type="time" id="alarms_time" required>
+        </div>
+
+        <button type="button" id="Set_Alarm_Btn" class="btn btn-primary" onclick="addAlarm()">Add</button>
+
+        
+    </div>
+</div>
     <div id="SaveChanges">
         <button type="button" id="SaveChangesBtn" class="btn btn-primary">Save</button>
         <button type="button" id="ResetChangesBtn" class="btn btn-primary">Reset</button>
     </div>
-    
+
     <div id="Error_pass_Main" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -156,11 +207,11 @@
             </div>
         </div>
     </div>
-    
- <!--   </div> -->
- <script type='text/javascript' src='Logo_Exceptions.js'></script>
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+</div>
+
+<script type='text/javascript' src='Logo_Exceptions.js'></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="Main.js"></script>
 <script src="toBridge.js"></script>

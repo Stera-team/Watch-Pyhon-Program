@@ -79,7 +79,14 @@ function CheckCode(){
     CheckCodeXHR.onload = () => {
             
         if((JSON.parse(CheckCodeXHR.response)).status){
-            window.location.replace("Main.html");
+            loginPage = document.getElementById("Login_page");
+            mainPage = document.getElementById("Main");
+            
+            $('#Code_Asking').modal('hide');
+
+            loginPage.style.display = "none";
+            mainPage.style.display = "block";
+
         }else{
             showError("Loading", "code");
 
